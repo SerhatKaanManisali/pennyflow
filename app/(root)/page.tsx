@@ -10,27 +10,14 @@ const Home = () => {
         <section className="home">
             <div className="home-content">
                 <header className="home-header">
-                    <HeaderBox
-                        type="greeting"
-                        title="Welcome"
-                        user={loggedIn?.firstName || "Guest"}
-                        subtext="Access and manage your account and transactions efficiently."
-                    />
+                    <HeaderBox type="greeting" title="Welcome" user={loggedIn?.firstName || "Guest"} subtext="Access and manage your account and transactions efficiently." />
 
-                    <TotalBalanceBox
-                        accounts={[]}
-                        totalBanks={3}
-                        totalCurrentBalance={1250.35}
-                    />
+                    <TotalBalanceBox accounts={[]} totalBanks={3} totalCurrentBalance={1250.35} />
                 </header>
 
                 RECENT TRANSACTIONS
             </div>
-            <RightSidebar
-                user={loggedIn}
-                transactions={[]}
-                banks={[{ currentBalance: 123.50 }, { currentBalance: 123.50 }]}
-            />
+            <RightSidebar user={loggedIn} transactions={[]} banks={[{ currentBalance: 123.50 }, { currentBalance: 123.50 }]} />
         </section>
     )
 }
