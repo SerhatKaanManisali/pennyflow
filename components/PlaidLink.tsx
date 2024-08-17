@@ -11,7 +11,6 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     useEffect(() => {
         const getLinkToken = async () => {
             const data = await createLinkToken(user);
-
             setToken(data?.linkToken);
         }
         getLinkToken();
@@ -36,7 +35,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     return (
         <>
             {variant === "primary" ? (
-                <Button className="plaidlink-primary" onClick={() => open} disabled={!ready}>
+                <Button className="plaidlink-primary" onClick={() => open()} disabled={!ready}>
                     Connect bank
                 </Button>
             ) : variant === "ghost" ? (
