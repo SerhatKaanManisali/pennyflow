@@ -1,5 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { BankTabItem } from './BankTabItem'
+import BankInfo from './BankInfo'
+import TransactionsTable from './TransactionsTable'
+
+
 
 const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page = 1 }: RecentTransactionsProps) => {
     return (
@@ -13,7 +19,21 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
                 </Link>
             </header>
 
-
+            <Tabs defaultValue={appwriteItemId} className="w-full">
+                <TabsList className='recent-transactions-tablist'>
+                    {accounts.map((account: Account) => (
+                        <TabsTrigger key={account.id} value={appwriteItemId}>
+                            <BankTabItem key={account.id} account={account} appwriteItemId={appwriteItemId} />
+                        </TabsTrigger>
+                    ))}
+                </TabsList>
+                {accounts.map((account: Account) => (
+                    <TabsContent key={account.id} value={appwriteItemId} className='space-y-4'>
+                        <BankInfo account={account} appwriteItemId={appwriteItemId} type='full' />
+                        <TransactionsTable transactions={transactions} />
+                    </TabsContent>
+                ))}
+            </Tabs>
         </section>
     )
 }
