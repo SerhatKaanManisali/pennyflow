@@ -2,7 +2,6 @@ import React from 'react'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -25,14 +24,14 @@ const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
     return (
         <Table>
-            <TableHeader className='bg-[#f9fafb'>
+            <TableHeader className='bg-[#f9fafb]'>
                 <TableRow >
                     <TableHead className="px-2">Transaction</TableHead>
                     <TableHead className="px-2">Amount</TableHead>
                     <TableHead className="px-2">Status</TableHead>
                     <TableHead className="px-2">Date</TableHead>
                     <TableHead className="px-2 max-md:hidden">Channel</TableHead>
-                    <TableHead className="px-2 max-md:hidden">Category</TableHead>
+                    <TableHead className="px-2 max-lg:hidden">Category</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -60,10 +59,10 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                             <TableCell className='pl-2 pr-10 min-w-32'>
                                 {formatDateTime(new Date(transaction.date)).dateTime}
                             </TableCell>
-                            <TableCell className='pl-2 pr-10 min-w-24 capitalize'>
+                            <TableCell className='pl-2 pr-10 max-md:hidden min-w-24 capitalize'>
                                 {transaction.paymentChannel}
                             </TableCell>
-                            <TableCell className='pl-2 pr-10 max-md:hidden'>
+                            <TableCell className='pl-2 pr-10 max-lg:hidden'>
                                 <CategoryBadge category={transaction.category} />
                             </TableCell>
                         </TableRow>

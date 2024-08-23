@@ -4,6 +4,7 @@ import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-
 import { useRouter } from 'next/navigation';
 import { createLinkToken, exchangePublicToken } from '@/lib/actions/user.actions';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     const router = useRouter();
@@ -44,10 +45,15 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
                     <Image src='/icons/connect-bank.svg' alt='connect bank' width={24} height={24} />
                     <p className='hidden text-[16px] font-semibold text-black-2 xl:block'>Connect bank</p>
                 </Button>
+            ) : variant === "mobile" ? (
+                <Button onClick={() => open()} className={cn('mobilenav-sheet_close w-full', '!justify-start')}>
+                    <Image src='/icons/connect-bank.svg' alt='connect bank' width={20} height={20} />
+                    <p className={cn('!text-16 font-semibold text-black-2')}>Connect bank</p>
+                </Button>
             ) : (
-                <Button onClick={() => open()} className='plaidlink-default'>
+                <Button onClick={() => open()} className={cn("sidebar-link")}>
                     <Image src='/icons/connect-bank.svg' alt='connect bank' width={24} height={24} />
-                    <p className='text-[16px] font-semibold text-black-2'>Connect bank</p>
+                    <p className={cn('sidebar-label')}>Connect bank</p>
                 </Button>
             )}
         </>
