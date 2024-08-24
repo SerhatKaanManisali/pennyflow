@@ -2,12 +2,14 @@
 
 import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
-import { Chart, ArcElement, Tooltip } from 'chart.js'
-Chart.register(ArcElement, Tooltip);
+import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js"
+
+ChartJS.register(ArcElement, Tooltip);
 
 const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
-    const accountNames = accounts.map((account) => account.name);
-    const balances = accounts.map((account) => account.currentBalance);
+    const flattenedAccounts = accounts[0];
+    const accountNames = flattenedAccounts.map((account: Account) => account.name);
+    const balances = flattenedAccounts.map((account: Account) => account.currentBalance);
 
     const data = {
         datasets: [
@@ -20,6 +22,7 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
         labels: accountNames
     }
 
+    console.log(balances, accountNames);
     return <Doughnut
         data={data}
         options={{

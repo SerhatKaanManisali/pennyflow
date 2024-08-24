@@ -29,7 +29,7 @@ import { Textarea } from "./ui/textarea";
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   name: z.string(),
-  amount: z.string().min(4, "Amount is too short"),
+  amount: z.string().min(1, "Amount is too short"),
   senderBank: z.string().min(4, "Please select a valid bank account"),
   sharableId: z.string().min(8, "Please select a valid sharable Id"),
 });
@@ -89,14 +89,13 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
     } catch (error) {
       console.error("Submitting create transfer request failed: ", error);
     }
-
     setIsLoading(false);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submit)} className="flex flex-col">
-        
+
         <FormField
           control={form.control}
           name="senderBank"
@@ -224,11 +223,16 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                 </FormLabel>
                 <div className="flex w-full flex-col">
                   <FormControl>
-                    <Input
-                      placeholder="ex: 5.00"
-                      className="input-class"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        placeholder="ex: 5"
+                        className="input-class pr-8"
+                        {...field}
+                      />
+                      <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-700">
+                        €
+                      </span>
+                    </div>
                   </FormControl>
                   <FormMessage className="text-12 text-red-500" />
                 </div>
@@ -238,13 +242,13 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
         />
 
         <div className="payment-transfer_btn-box">
-          <Button type="submit" className="payment-transfer_btn">
+          <Button type="submit" className="payment-transfer_btn" disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 size={20} className="animate-spin" /> &nbsp; Sending...
               </>
             ) : (
-              "Transfer Funds"
+              "Transfer funds"
             )}
           </Button>
         </div>

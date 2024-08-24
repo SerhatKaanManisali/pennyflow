@@ -159,7 +159,7 @@ body {
 
   /* Right sidebar */
   .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll !important;
+    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 2xl:flex w-[355px] lg:overflow-y-scroll !important;
   }
 
   .profile-banner {

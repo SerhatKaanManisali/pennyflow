@@ -240,7 +240,7 @@ declare interface CategoryProps {
 }
 
 declare interface DoughnutChartProps {
-  accounts: Account[];
+  accounts: Account[][];
 }
 
 declare interface PaymentTransferFormProps {
