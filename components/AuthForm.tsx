@@ -33,6 +33,8 @@ const AuthForm = ({ type }: { type: string }) => {
         setIsLoading(true);
         try {
             if (type === "sign-up") {
+                const [day, month, year] = data.dateOfBirth!.split('-');
+                const formattedDateOfBirth = `${year}-${month}-${day}`;
                 const userData = {
                     firstName: data.firstName!,
                     lastName: data.lastName!,
@@ -40,7 +42,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     city: data.city!,
                     state: data.state!,
                     postalCode: data.postalCode!,
-                    dateOfBirth: data.dateOfBirth!,
+                    dateOfBirth: formattedDateOfBirth,
                     ssn: data.ssn!,
                     email: data.email,
                     password: data.password
@@ -104,7 +106,7 @@ const AuthForm = ({ type }: { type: string }) => {
                                         <CustomInput control={form.control} name={"postalCode"} label={"Postal code"} placeholder={"Example: 10317"} />
                                     </div>
                                     <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"Pick a date"} />
+                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"DD-MM-YYYY"} />
                                         <CustomInput control={form.control} name={"ssn"} label={"SSN"} placeholder={"Example: 1234"} />
                                     </div>
                                 </>
