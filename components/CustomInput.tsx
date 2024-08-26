@@ -1,19 +1,10 @@
 import React from 'react'
 import { FormControl, FormDescription, FormField, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
-import { Control, FieldPath } from 'react-hook-form'
-import { z } from 'zod'
-import { authFormSchema } from '@/lib/utils'
+import { authFormSchema, cn } from '@/lib/utils'
+import Datepicker from './Datepicker'
 
-const formSchema = authFormSchema("sign-up")
-
-interface CustomInput {
-    control: Control<z.infer<typeof formSchema>>,
-    name: FieldPath<z.infer<typeof formSchema>>,
-    label: string,
-    placeholder: string,
-    description?: string
-}
+const formSchema = authFormSchema("sign-up");
 
 const CustomInput = ({ control, name, label, placeholder, description }: CustomInput) => {
     return (
@@ -30,7 +21,11 @@ const CustomInput = ({ control, name, label, placeholder, description }: CustomI
                   </FormDescription>
                     <div className="flex w-full flex-col">
                         <FormControl>
-                            <Input placeholder={placeholder} className="input-class" type={name === "password" ? name : "text"} {...field} />
+                            {name === 'dateOfBirth' ? (
+                                <Datepicker field={field} />
+                            ) : (
+                                <Input placeholder={placeholder} className="input-class" type={name === "password" ? name : "text"} {...field} />
+                            )}
                         </FormControl>
                         <FormMessage className="form-message mt-2" />
                     </div>

@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import { Form, } from "@/components/ui/form"
+import { Form } from "@/components/ui/form"
 import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
@@ -32,7 +32,6 @@ const AuthForm = ({ type }: { type: string }) => {
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setIsLoading(true);
         try {
-
             if (type === "sign-up") {
                 const userData = {
                     firstName: data.firstName!,
@@ -55,14 +54,10 @@ const AuthForm = ({ type }: { type: string }) => {
                     email: data.email,
                     password: data.password
                 });
-
                 if (response) router.push("/");
             }
         } catch (error) {
             console.log(error);
-
-        } finally {
-            setIsLoading(false);
         }
     }
 
@@ -109,7 +104,7 @@ const AuthForm = ({ type }: { type: string }) => {
                                         <CustomInput control={form.control} name={"postalCode"} label={"Postal code"} placeholder={"Example: 10317"} />
                                     </div>
                                     <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"YYYY-MM-DD"} />
+                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"Pick a date"} />
                                         <CustomInput control={form.control} name={"ssn"} label={"SSN"} placeholder={"Example: 1234"} />
                                     </div>
                                 </>

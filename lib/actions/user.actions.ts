@@ -8,7 +8,6 @@ import { AccountBase, CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCr
 import { plaidClient } from "../plaid";
 import { revalidatePath } from "next/cache";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
-import { redirect } from "next/navigation";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -92,7 +91,7 @@ export async function getLoggedInUser() {
         const user = await getUserInfo({ userId: result.$id });
         return parseStringify(user);
     } catch (error) {
-        redirect("/sign-in");
+        return null;
     }
 }
 
