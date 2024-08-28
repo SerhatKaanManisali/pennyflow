@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -10,15 +10,16 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
-import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
+import { useLoading } from './LoadingOverlayContext'
+import LoadingOverlayManager from './LoadingOverlayManager'
 
 const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
     const [user, setuser] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const { setIsLoading } = useLoading();
     const formSchema = authFormSchema(type);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -33,6 +34,8 @@ const AuthForm = ({ type }: { type: string }) => {
         setIsLoading(true);
         try {
             if (type === "sign-up") {
+                const [day, month, year] = data.dateOfBirth!.split('-');
+                const formattedDateOfBirth = `${year}-${month}-${day}`;
                 const userData = {
                     firstName: data.firstName!,
                     lastName: data.lastName!,
@@ -40,7 +43,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     city: data.city!,
                     state: data.state!,
                     postalCode: data.postalCode!,
-                    dateOfBirth: data.dateOfBirth!,
+                    dateOfBirth: formattedDateOfBirth,
                     ssn: data.ssn!,
                     email: data.email,
                     password: data.password
@@ -63,8 +66,9 @@ const AuthForm = ({ type }: { type: string }) => {
 
     return (
         <section className="auth-form">
+            <LoadingOverlayManager />
             <header className="flex flex-col gap-5 md:gap-8">
-                <Link href="/" className="cursor-pointer flex items-center gap-1">
+                <Link href="/" className="cursor-pointer flex items-center gap-1" onClick={() => setIsLoading(true)}>
                     <Image
                         src="./icons/logo.svg"
                         width={34}
@@ -104,7 +108,7 @@ const AuthForm = ({ type }: { type: string }) => {
                                         <CustomInput control={form.control} name={"postalCode"} label={"Postal code"} placeholder={"Example: 10317"} />
                                     </div>
                                     <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"Pick a date"} />
+                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"DD-MM-YYYY"} />
                                         <CustomInput control={form.control} name={"ssn"} label={"SSN"} placeholder={"Example: 1234"} />
                                     </div>
                                 </>
@@ -112,16 +116,8 @@ const AuthForm = ({ type }: { type: string }) => {
                             <CustomInput control={form.control} name={"email"} label={"Email"} placeholder={"Enter your email"} />
                             <CustomInput control={form.control} name={"password"} label={"Password"} placeholder={"Enter your password"} />
                             <div className="flex flex-col gap-4">
-                                <Button type="submit" disabled={isLoading} className="form-btn">{isLoading ? (
-                                    <>
-                                        <Loader2
-                                            size={20}
-                                            className="animate-spin"
-                                        />
-                                        &nbsp;
-                                        Loading...
-                                    </>
-                                ) : type === "sign-in" ? "Sign in" : "Sign up"}
+                                <Button type="submit" className="form-btn">
+                                    {type === "sign-in" ? "Sign in" : "Sign up"}
                                 </Button>
                             </div>
                         </form>
@@ -131,8 +127,7 @@ const AuthForm = ({ type }: { type: string }) => {
                             {type === "sign-in" ? "Don't have an account?" : "Already have an account?"}
                         </p>
                         <Link
-                            href={type === "sign-in" ? "/sign-up" : "/sign-in"}
-                            className="form-link">
+                            href={type === "sign-in" ? "/sign-up" : "/sign-in"} className="form-link" onClick={() => setIsLoading(true)}>
                             {type === "sign-in" ? "Sign up" : "Sign in"}
                         </Link>
                     </footer>

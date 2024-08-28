@@ -46,13 +46,13 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
                     <p className='hidden text-[16px] font-semibold text-black-2 xl:block'>Connect bank</p>
                 </Button>
             ) : variant === "mobile" ? (
-                <Button onClick={() => open()} className={cn('mobilenav-sheet_close w-full', '!justify-start')}>
-                    <Image src='/icons/connect-bank.svg' alt='connect bank' width={20} height={20} />
+                <Button onClick={() => open()} className={cn('mobilenav-sheet_close w-full', '!justify-start', 'h-[48px]')}>
+                    <Image src='/icons/connect-bank.svg' alt='connect bank' width={20} height={20}/>
                     <p className={cn('!text-16 font-semibold text-black-2')}>Connect bank</p>
                 </Button>
             ) : (
-                <Button onClick={() => open()} className={cn("sidebar-link")}>
-                    <Image src='/icons/connect-bank.svg' alt='connect bank' width={24} height={24} />
+                <Button onClick={() => open()} className={cn('sidebar-link', 'h-[48px]')}>
+                    <Image src='/icons/connect-bank.svg' alt='connect bank' width={24} height={24} className='sidebar-link-icon'/>
                     <p className={cn('sidebar-label')}>Connect bank</p>
                 </Button>
             )}

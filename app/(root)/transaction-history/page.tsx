@@ -1,4 +1,5 @@
 import HeaderBox from '@/components/HeaderBox'
+import LoadingOverlayManager from '@/components/LoadingOverlayManager';
 import { Pagination } from '@/components/Pagination';
 import TransactionsTable from '@/components/TransactionsTable';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
@@ -26,6 +27,7 @@ const TransactionHistory = async ({ searchParams: { id, page } }: SearchParamPro
     
     return (
         <div className='transactions'>
+            <LoadingOverlayManager />
             <div className='transactions-header'>
                 <HeaderBox title='Transaction history' subtext='See your bank details and transactions.' />
             </div>

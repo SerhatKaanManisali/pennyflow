@@ -2,12 +2,15 @@ import { logoutAccount } from '@/lib/actions/user.actions'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useLoading } from './LoadingOverlayContext'
 
 const Footer = ({ user, type = "desktop" }: FooterProps) => {
     const router = useRouter();
+    const { setIsLoading } = useLoading();
     const handleLogOut = async () => {
+        setIsLoading(true);
         const loggedOut = await logoutAccount();
-        if (loggedOut) router.push("/sign-in")
+        if (loggedOut) router.push("/sign-in");
     }
     return (
         <footer className="footer">
@@ -21,7 +24,7 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
                 <p className="text-14 truncate font-normal text-gray-600">{user.email}</p>
             </div>
             <div className="footer_image" onClick={handleLogOut}>
-                <Image src="/icons/logout.svg" fill alt="logout" />
+                <Image src="/icons/logout.svg" fill alt="logout" className='sidebar-link-icon p-2'/>
             </div>
         </footer>
     )

@@ -25,6 +25,8 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import LoadingOverlay from "./LoadingOverlay";
+import { useLoading } from "./LoadingOverlayContext";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -36,7 +38,7 @@ const formSchema = z.object({
 
 const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const {setIsLoading} = useLoading();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,7 +53,6 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
 
   const submit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-
     try {
       const receiverAccountId = decryptId(data.sharableId);
       const receiverBank = await getBankByAccountId({
@@ -89,13 +90,11 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
     } catch (error) {
       console.error("Submitting create transfer request failed: ", error);
     }
-    setIsLoading(false);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submit)} className="flex flex-col">
-
         <FormField
           control={form.control}
           name="senderBank"
@@ -242,14 +241,8 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
         />
 
         <div className="payment-transfer_btn-box">
-          <Button type="submit" className="payment-transfer_btn" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Loader2 size={20} className="animate-spin" /> &nbsp; Sending...
-              </>
-            ) : (
-              "Transfer funds"
-            )}
+          <Button type="submit" className="payment-transfer_btn">
+            Transfer funds
           </Button>
         </div>
       </form>

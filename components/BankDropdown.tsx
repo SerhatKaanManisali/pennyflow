@@ -1,24 +1,13 @@
 "use client";
 
+import React from 'react';
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-} from "@/components/ui/select";
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger } from "@/components/ui/select";
 import { formUrlQuery, formatAmount } from "@/lib/utils";
 
-export const BankDropdown = ({
-  accounts = [],
-  setValue,
-  otherStyles,
-}: BankDropdownProps) => {
+export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropdownProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selected, setSeclected] = useState(accounts[0]);

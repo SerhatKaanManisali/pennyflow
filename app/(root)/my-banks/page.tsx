@@ -1,5 +1,6 @@
 import BankCard from '@/components/BankCard'
 import HeaderBox from '@/components/HeaderBox'
+import LoadingOverlayManager from '@/components/LoadingOverlayManager'
 import { getAccounts } from '@/lib/actions/bank.actions'
 import { getLoggedInUser } from '@/lib/actions/user.actions'
 import { redirect } from 'next/navigation'
@@ -12,6 +13,7 @@ const MyBanks = async () => {
 
     return (
         <section className='flex'>
+            <LoadingOverlayManager />
             <div className='my-banks'>
                 <HeaderBox title='My bank accounts' subtext='Effortlessly manage your banking activities.' />
                 <div className='space-y-4'>
