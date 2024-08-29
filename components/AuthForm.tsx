@@ -13,7 +13,7 @@ import { authFormSchema } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
-import { useLoading } from './LoadingOverlayContext'
+import { useLoading } from './LoadingOverlay'
 
 const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
@@ -73,10 +73,10 @@ const AuthForm = ({ type }: { type: string }) => {
                         height={34}
                         alt="Pennyflow logo"
                     />
-                    <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Pennyflow</h1>
+                    <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 dark:text-white">Pennyflow</h1>
                 </Link>
                 <div className="flex flex-col gap-1 md:gap-3">
-                    <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
+                    <h1 className="text-24 lg:text-36 font-semibold text-gray-900 dark:text-white">
                         {user ? "Link Account" : type === "sign-in" ? "Sign in" : "Sign up"}
                         <p className="text-16 font-normal text-gray-600">
                             {user ? "Link your account to get started" : "Please enter your details"}

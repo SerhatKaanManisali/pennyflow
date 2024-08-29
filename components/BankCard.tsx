@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import Copy from './Copy'
-import { useLoading } from './LoadingOverlayContext'
+import { useLoading } from './LoadingOverlay'
 
 const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) => {
     const { setIsLoading } = useLoading();

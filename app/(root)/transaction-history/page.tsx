@@ -1,4 +1,4 @@
-import { LoadingProvider } from '@/components/LoadingOverlayContext';
+import { LoadingProvider } from '@/components/LoadingOverlay';
 import TransactionHistoryClient from '@/components/TransactionHistoryClient';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';

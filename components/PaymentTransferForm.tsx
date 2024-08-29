@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { useLoading } from "./LoadingOverlayContext";
+import { useLoading } from "./LoadingOverlay";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),

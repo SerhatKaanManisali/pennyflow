@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
-import { LoadingProvider } from "@/components/LoadingOverlayContext";
+import { LoadingProvider } from "@/components/LoadingOverlay";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -25,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${ibmPlexSerif.variable}`}>
-        <LoadingProvider>
-          {children}
-        </LoadingProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <LoadingProvider>
+            {children}
+          </LoadingProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

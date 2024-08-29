@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import Footer from './Footer'
 import PlaidLink from './PlaidLink'
-import { useLoading } from './LoadingOverlayContext'
+import { useLoading } from './LoadingOverlay'
 
 const Sidebar = ({ user }: SiderbarProps) => {
     const pathName = usePathname();

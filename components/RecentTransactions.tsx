@@ -8,6 +8,7 @@ import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
 import { Pagination } from './Pagination'
 import TransactionsTableSkeleton from './TransactionsTableSkeleton'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page = 1 }: RecentTransactionsProps) => {
     const rowsPerPage = 10;
@@ -16,7 +17,16 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
     const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
     const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
     const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => setIsLoading(false), [appwriteItemId, page]);
+    const searchParams = useSearchParams();
+    const pathName = usePathname();
+    const router = useRouter();
+    useEffect(() => setIsLoading(false), [page, searchParams]);
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete('page');
+        const newUrl = `${pathName}?${params.toString()}`;
+        router.replace(newUrl);
+    }, [appwriteItemId]);
 
     return (
         <section className='recent-transactions'>
@@ -47,7 +57,7 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
                         )}
                         {totalPages > 1 && (
                             <div className='my-4 w-full'>
-                                <Pagination totalPages={totalPages} page={page} setIsLaoading={setIsLoading}/>
+                                <Pagination totalPages={totalPages} page={page} setIsLaoading={setIsLoading} />
                             </div>
                         )}
                     </TabsContent>

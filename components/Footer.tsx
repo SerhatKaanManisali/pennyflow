@@ -2,7 +2,7 @@ import { logoutAccount } from '@/lib/actions/user.actions'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { useLoading } from './LoadingOverlayContext'
+import { useLoading } from './LoadingOverlay'
 
 const Footer = ({ user, type = "desktop" }: FooterProps) => {
     const router = useRouter();
