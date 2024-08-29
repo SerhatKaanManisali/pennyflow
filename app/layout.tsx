@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
 import { LoadingProvider } from "@/components/LoadingOverlayContext";
-import LoadingOverlayManager from "@/components/LoadingOverlayManager";
+
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -12,8 +12,8 @@ const ibmPlexSerif = IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "Horizon",
-  description: "Horizon is a modern banking platform for everyone.",
+  title: "Pennyflow",
+  description: "Pennyflow is a modern banking platform for everyone.",
   icons: {
     icon: "./icons/logo.svg"
   }
@@ -28,7 +28,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${ibmPlexSerif.variable}`}>
         <LoadingProvider>
-          <LoadingOverlayManager />
           {children}
         </LoadingProvider>
       </body>

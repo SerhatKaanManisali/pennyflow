@@ -47,6 +47,16 @@ body {
   background: #7878a3;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 @layer utilities {
   .input-class {
     @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
@@ -249,6 +259,14 @@ body {
 
   .banktab-item {
     @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+  }
+
+  .banktab-item:hover {
+    @apply border-blue-600
+  }
+
+  .banktab-item:hover p {
+    @apply text-blue-600
   }
 
   /* Mobile nav */

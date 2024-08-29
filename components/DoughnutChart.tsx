@@ -21,8 +21,7 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
         ],
         labels: accountNames
     }
-
-    console.log(balances, accountNames);
+    
     return <Doughnut
         data={data}
         options={{

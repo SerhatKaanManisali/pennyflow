@@ -170,6 +170,7 @@ declare interface PageHeaderProps {
 
 declare interface PaginationProps {
   page: number;
+  setIsLaoading: (loading: boolean) => void;
   totalPages: number;
 }
 
@@ -225,6 +226,13 @@ declare interface RecentTransactionsProps {
 declare interface TransactionHistoryTableProps {
   transactions: Transaction[];
   page: number;
+}
+
+declare interface TransactionHistoryClientParams {
+  account: any;
+  currentTransactions: Transaction[];
+  totalPages: number;
+  currentPage: number;
 }
 
 declare interface CategoryBadgeProps {
@@ -331,4 +339,13 @@ declare interface CustomInput {
 declare module 'react-input-mask' {
   const InputMask: any;
   export default InputMask;
+}
+
+interface LoadingContextType {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+interface LoadingProviderProps {
+  children: ReactNode;
 }
