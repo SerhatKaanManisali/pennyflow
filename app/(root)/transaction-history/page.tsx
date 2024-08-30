@@ -1,4 +1,3 @@
-import { LoadingProvider } from '@/components/LoadingOverlay';
 import TransactionHistoryClient from '@/components/TransactionHistoryClient';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
@@ -21,16 +20,14 @@ const TransactionHistory = async ({ searchParams: { id, page } }: SearchParamPro
     const indexOfLastTransaction = currentPage * rowsPerPage;
     const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
     const currentTransactions = account?.transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
-    
+
     return (
-        <LoadingProvider>
-            <TransactionHistoryClient
-                account={account}
-                currentTransactions={currentTransactions}
-                totalPages={totalPages}
-                currentPage={currentPage}
-            />
-        </LoadingProvider>
+        <TransactionHistoryClient
+            account={account}
+            currentTransactions={currentTransactions}
+            totalPages={totalPages}
+            currentPage={currentPage}
+        />
     )
 }
 

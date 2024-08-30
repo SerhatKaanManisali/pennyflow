@@ -16,7 +16,7 @@ export const Category = ({ category }: CategoryProps) => {
   topCategoryStyles.default;
 
   return (
-    <div className={cn("gap-[18px] flex p-4 rounded-xl", bg)}>
+    <div className={cn("gap-[18px] flex p-4 rounded-xl dark:bg-[#191919]", bg)}>
       <figure className={cn("flex-center size-10 rounded-full", circleBg)}>
         <Image src={icon} width={20} height={20} alt={category.name} />
       </figure>

@@ -7,7 +7,7 @@ const TransactionsTableSkeleton = () => {
 
     return (
         <Table>
-            <TableHeader className='bg-[#f9fafb]'>
+            <TableHeader className='bg-[#f9fafb] dark:bg-[#191919]'>
                 <TableRow>
                     <TableHead className="px-2">Transaction</TableHead>
                     <TableHead className="px-2">Amount</TableHead>
@@ -19,7 +19,7 @@ const TransactionsTableSkeleton = () => {
             </TableHeader>
             <TableBody>
                 {rows.map((_, index) => (
-                    <TableRow key={index} className="bg-[#f9fafb] animate-pulse">
+                    <TableRow key={index} className="bg-[#f9fafb] dark:bg-[#373737] animate-pulse">
                         <TableCell className='max-w-[250px] pl-2 pr-10'>
                             <div className='flex items-center gap-3'>
                                 <div className="h-4 bg-gray-300 rounded w-3/4"></div>

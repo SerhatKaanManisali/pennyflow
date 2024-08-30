@@ -59,7 +59,7 @@ input[type="number"] {
 
 @layer utilities {
   .input-class {
-    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-700 dark:text-gray-500;
+    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-700 dark:text-gray-300;
   }
 
   .sheet-content button {
@@ -75,7 +75,7 @@ input[type="number"] {
   }
 
   .header-2 {
-    @apply text-18 font-semibold text-gray-900;
+    @apply text-18 font-semibold text-gray-900 dark:text-gray-600;
   }
 
   .text-10 {
@@ -132,7 +132,7 @@ input[type="number"] {
   }
 
   .total-balance {
-    @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 p-4 shadow-chart sm:gap-6 sm:p-6;
+    @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 dark:border-none p-4 shadow-chart sm:gap-6 sm:p-6 dark:bg-[#191919];
   }
 
   .total-balance-chart {
@@ -140,19 +140,15 @@ input[type="number"] {
   }
 
   .total-balance-label {
-    @apply text-14 font-medium text-gray-600;
+    @apply text-14 font-medium text-gray-700;
   }
 
   .total-balance-amount {
-    @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900;
-  }
-
-  .recent-transactions {
-    @apply flex w-full flex-col gap-6;
+    @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900 dark:text-gray-300;
   }
 
   .view-all-btn {
-    @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
+    @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-600;
   }
 
   .recent-transactions {
@@ -160,7 +156,7 @@ input[type="number"] {
   }
 
   .recent-transactions-label {
-    @apply text-20 md:text-24 font-semibold text-gray-900;
+    @apply text-20 md:text-24 font-semibold text-gray-900 dark:text-gray-300;
   }
 
   .recent-transactions-tablist {
@@ -181,7 +177,7 @@ input[type="number"] {
   }
 
   .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
+    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 dark:bg-gray-300 border-8 border-white dark:border-gray-300 p-2 shadow-profile;
   }
 
   .profile-details {
@@ -189,7 +185,7 @@ input[type="number"] {
   }
 
   .profile-name {
-    @apply text-24 font-semibold text-gray-900;
+    @apply text-24 font-semibold text-gray-300;
   }
 
   .profile-email {
@@ -202,12 +198,11 @@ input[type="number"] {
 
   /* My Banks */
   .my-banks {
-    @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-gray-25 p-8 xl:py-12;
+    @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-gray-25 dark:bg-[#121212] p-8 xl:py-12;
   }
 
-  /* My Banks */
   .transactions {
-    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 p-8 xl:py-12;
+    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 dark:bg-[#121212] p-8 xl:py-12;
   }
 
   .transactions-header {
@@ -215,11 +210,11 @@ input[type="number"] {
   }
 
   .transactions-account {
-    @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-blue-600 px-4 py-5 md:flex-row;
+    @apply flex flex-col justify-between gap-4 rounded-lg border-y dark:border-none bg-blue-600 dark:bg-[#191919] px-4 py-5 md:flex-row;
   }
 
   .transactions-account-balance {
-    @apply flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white;
+    @apply flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white dark:text-gray-300;
   }
 
   .header-box {
@@ -227,7 +222,7 @@ input[type="number"] {
   }
 
   .header-box-title {
-    @apply text-24 lg:text-30 font-semibold text-gray-900;
+    @apply text-24 lg:text-30 font-semibold text-gray-900 dark:text-white;
   }
 
   .header-box-subtext {
@@ -236,7 +231,7 @@ input[type="number"] {
 
   /* Bank Card */
   .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px];
+    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white dark:border-[#191919] dark:text-gray-300 bg-bank-gradient shadow-creditCard backdrop-blur-[6px];
   }
 
   .bank-card_content {
@@ -249,7 +244,7 @@ input[type="number"] {
 
   /* Bank Info */
   .bank-info {
-    @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;
+    @apply gap-[18px] flex p-4 transition-all border bg-blue-25 dark:bg-[#191919] border-transparent;
   }
 
   /* Category Badge */
@@ -310,7 +305,7 @@ input[type="number"] {
   }
 
   .form-message {
-    @apply text-12 text-red-500;
+    @apply text-12 text-red-500 dark:text-[#b91c1c];
   }
 
   .form-btn {
@@ -323,11 +318,11 @@ input[type="number"] {
 
   /* Payment Transfer */
   .payment-transfer {
-    @apply no-scrollbar flex flex-col overflow-y-scroll bg-gray-25 p-8 md:max-h-screen xl:py-12;
+    @apply no-scrollbar flex flex-col overflow-y-scroll bg-gray-25 dark:bg-[#121212] p-8 md:max-h-screen xl:py-12;
   }
 
   .payment-transfer_form-item {
-    @apply flex w-full max-w-[850px] flex-col gap-3 md:flex-row lg:gap-8;
+    @apply flex w-full max-w-[850px] flex-col gap-5 md:flex-row lg:gap-8;
   }
 
   .payment-transfer_form-content {
@@ -362,11 +357,11 @@ input[type="number"] {
   }
 
   .footer_name {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-200 max-xl:hidden;
+    @apply flex size-10 items-center justify-center rounded-full bg-gray-300 max-xl:hidden dark:text-gray-600;
   }
 
   .footer_email {
-    @apply flex flex-1 flex-col justify-center max-xl:hidden;
+    @apply flex flex-1 flex-col justify-center max-xl:hidden dark:text-gray-600;
   }
 
   .footer_name-mobile {
@@ -387,11 +382,11 @@ input[type="number"] {
 
   /* Sidebar */
   .sidebar {
-    @apply sticky left-0 top-0 flex h-screen w-fit flex-col  justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
+    @apply sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r border-gray-200 bg-white dark:bg-[#121212] pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
   }
 
   .sidebar-logo {
-    @apply 2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden;
+    @apply 2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 dark:text-white max-xl:hidden;
   }
 
   .sidebar-link {
@@ -407,11 +402,23 @@ input[type="number"] {
   }
 
   .sidebar-label {
-    @apply text-16 font-semibold text-black-2 max-xl:hidden;
+    @apply text-16 font-semibold text-black-2 dark:text-gray-600 max-xl:hidden;
   }
 
   .loading-overlay {
     @apply fixed inset-0 opacity-50 flex items-center justify-center z-[999];
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .theme-toggle {
+    @apply ml-1 hover:bg-bank-gradient;
+  }
+
+  .theme-toggle-icon {
+    @apply h-[1.2rem] w-[1.2rem] transition-all text-[#667085];
+  }
+
+  .theme-toggle:hover .theme-toggle-icon {
+    @apply !text-white;
   }
 }

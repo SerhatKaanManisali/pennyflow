@@ -9,18 +9,19 @@ import React from 'react'
 import Footer from './Footer'
 import PlaidLink from './PlaidLink'
 import { useLoading } from './LoadingOverlay'
+import ThemeToggle from './ThemeToggle'
 
 const Sidebar = ({ user }: SiderbarProps) => {
     const pathName = usePathname();
-    const {setIsLoading} = useLoading();
+    const { setIsLoading } = useLoading();
 
     return (
         <section className="sidebar">
             <nav className="flex flex-col gap-4">
-                <Link href="/" className="mb-12 cursor-pointer items-center gap-2 flex" onClick={() => setIsLoading(true)}>
+                <div className="mb-12 items-center gap-2 flex">
                     <Image src="./icons/logo.svg" width={34} height={34} alt="Pennyflow logo" className="size-[24px] max-xl:size-14" />
                     <h1 className="sidebar-logo">Pennyflow</h1>
-                </Link>
+                </div>
                 {sidebarLinks.map((item) => {
                     const isActive = pathName === item.route || pathName.startsWith(`${item.route}/`);
 
@@ -36,10 +37,10 @@ const Sidebar = ({ user }: SiderbarProps) => {
                         </p>
                     </Link>
                 })}
-
                 <PlaidLink user={user} />
+                <ThemeToggle />
             </nav>
-
+            
             <Footer user={user} />
         </section>
     )

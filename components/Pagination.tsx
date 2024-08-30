@@ -27,7 +27,7 @@ export const Pagination = ({ page, totalPages, setIsLaoading }: PaginationProps)
       <Button
         size="lg"
         variant="ghost"
-        className="p-0 hover:bg-transparent"
+        className="p-0 hover:bg-transparent dark:text-gray-600"
         onClick={() => handleNavigation("prev")}
         disabled={Number(page) <= 1}
       >
@@ -40,13 +40,13 @@ export const Pagination = ({ page, totalPages, setIsLaoading }: PaginationProps)
         />
         Prev
       </Button>
-      <p className="text-14 flex items-center px-2">
+      <p className="text-14 flex items-center px-2 dark:text-gray-600">
         {page} / {totalPages}
       </p>
       <Button
         size="lg"
         variant="ghost"
-        className="p-0 hover:bg-transparent"
+        className="p-0 hover:bg-transparent dark:text-gray-600"
         onClick={() => handleNavigation("next")}
         disabled={Number(page) >= totalPages}
       >

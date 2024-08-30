@@ -106,7 +106,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                       otherStyles="!w-full"
                     />
                   </FormControl>
-                  <FormMessage className="text-12 text-red-500" />
+                  <FormMessage className="form-message" />
                 </div>
               </div>
             </FormItem>
@@ -136,7 +136,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-12 text-red-500" />
+                  <FormMessage className="form-message" />
                 </div>
               </div>
             </FormItem>
@@ -144,7 +144,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
         />
 
         <div className="payment-transfer_form-details">
-          <h2 className="text-18 font-semibold text-gray-900">
+          <h2 className="text-18 font-semibold text-gray-900 dark:text-gray-700">
             Bank account details
           </h2>
           <p className="text-16 font-normal text-gray-600">
@@ -169,7 +169,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-12 text-red-500" />
+                  <FormMessage className="form-message" />
                 </div>
               </div>
             </FormItem>
@@ -193,7 +193,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-12 text-red-500" />
+                  <FormMessage className="form-message" />
                 </div>
               </div>
             </FormItem>
@@ -222,7 +222,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
                       </span>
                     </div>
                   </FormControl>
-                  <FormMessage className="text-12 text-red-500" />
+                  <FormMessage className="form-message" />
                 </div>
               </div>
             </FormItem>

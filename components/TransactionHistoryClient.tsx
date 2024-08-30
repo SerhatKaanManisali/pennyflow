@@ -19,13 +19,13 @@ const TransactionHistoryClient = ( {account, currentTransactions, totalPages, cu
             <div className='space-y-6'>
                 <div className='transactions-account'>
                     <div className='flex flex-col gap-2'>
-                        <h2 className='text-18 font-bold text-white'>
+                        <h2 className='text-18 font-bold text-white dark:text-gray-300'>
                             {account?.data.name}
                         </h2>
-                        <p className='text-14 text-blue-25'>
+                        <p className='text-14 text-blue-25 dark:text-gray-300'>
                             {account?.data.officialName}
                         </p>
-                        <p className="text-14 font-semibold tracking-[1.1px] text-white">
+                        <p className="text-14 font-semibold tracking-[1.1px] text-white dark:text-gray-300">
                             &#9679;&#9679;&#9679;&#9679; &#9679;&#9679;&#9679;&#9679; &#9679;&#9679;&#9679;&#9679; {account?.data.mask}
                         </p>
                     </div>
