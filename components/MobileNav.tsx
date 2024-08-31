@@ -23,7 +23,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                 <SheetContent side="left" className="border-none bg-white dark:!bg-[#121212]">
                     <Link href="/" className="pointer-events-none flex items-center gap-1 px-4">
                         <Image src="./icons/logo.svg" width={34} height={34} alt="Pennyflow logo" />
-                        <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Pennyflow</h1>
+                        <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 dark:text-gray-300">Pennyflow</h1>
                     </Link>
                     <div className="mobilenav-sheet">
                         <SheetClose asChild>
@@ -43,7 +43,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                         </SheetClose>
                                     )
                                 })}
-                                <PlaidLink user={user} variant='mobile'/>
+                                <PlaidLink user={user} variant='mobile' />
                                 <ThemeToggle />
                             </nav>
                         </SheetClose>

@@ -349,3 +349,7 @@ interface LoadingContextType {
 interface LoadingProviderProps {
   children: ReactNode;
 }
+
+interface ThemeToggleParams {
+  onAuth?: boolean;
+}

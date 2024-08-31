@@ -293,7 +293,7 @@ input[type="number"] {
 
   /* Auth Form */
   .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8 no-scrollbar;
+    @apply flex h-fit w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8 no-scrollbar;
   }
 
   .form-item {
@@ -373,11 +373,11 @@ input[type="number"] {
   }
 
   .footer_image {
-    @apply relative cursor-pointer size-4 rounded-lg p-5 hover:bg-bank-gradient;
+    @apply relative cursor-pointer size-4 rounded-lg p-5 md:hover:bg-bank-gradient;
   }
 
   .footer_image:hover img {
-    @apply brightness-[3] invert-0;
+    @apply md:brightness-[3] md:invert-0;
   }
 
   /* Sidebar */
@@ -411,7 +411,11 @@ input[type="number"] {
   }
 
   .theme-toggle {
-    @apply w-[3.2rem] max-md:w-11 h-12 p-3 hover:bg-bank-gradient;
+    @apply w-[3.2rem] max-md:w-11 h-12 p-3;
+  }
+
+  .theme-toggle-auth {
+    @apply w-[3.2rem] max-md:w-12 h-12 p-3;
   }
 
   .theme-toggle-icon {
@@ -419,6 +423,6 @@ input[type="number"] {
   }
 
   .theme-toggle:hover .theme-toggle-icon {
-    @apply !text-white;
+    @apply md:!text-white;
   }
 }

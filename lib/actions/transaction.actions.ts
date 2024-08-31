@@ -24,7 +24,7 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
         )
         return parseStringify(newTransaction);
     } catch (error) {
-        console.log(error);
+        return {fail: true, message: 'Creating transfer failed!'}
     }
 }
 export const getTransactionsByBankId = async ({bankId}: getTransactionsByBankIdProps) => {

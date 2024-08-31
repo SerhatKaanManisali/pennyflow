@@ -22,6 +22,7 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
     const searchParams = useSearchParams();
     const pathName = usePathname();
     const router = useRouter();
+    useEffect(() => setLoadingState(true), []);
     useEffect(() => setLoadingState(false), [page, searchParams]);
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString());

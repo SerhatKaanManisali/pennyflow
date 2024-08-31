@@ -33,8 +33,8 @@ export const signIn = async ({ email, password }: signInProps) => {
         setCookies(session);
         const user = await getUserInfo({ userId: session.userId });
         return parseStringify(user);
-    } catch (error) {
-        return error;
+    } catch (error: any) {
+        return {fail: true, message: error?.response.message};
     }
 }
 
@@ -56,8 +56,8 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
         const session = await account.createEmailPasswordSession(email, password);
         setCookies(session);
         return parseStringify(newUser);
-    } catch (error) {
-        toast.error('Sign up failed!');
+    } catch (error: any) {
+        return {fail: true, message: error?.response.message};
     }
 }
 
@@ -116,9 +116,7 @@ export const createLinkToken = async (user: User) => {
             language: "en",
             country_codes: ["US"] as CountryCode[]
         }
-
         const response = await plaidClient.linkTokenCreate(tokenParams);
-
         return parseStringify({ linkToken: response.data.link_token })
     } catch (error) {
         console.log(error);

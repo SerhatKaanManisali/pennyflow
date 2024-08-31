@@ -49,7 +49,11 @@ const AuthForm = ({ type }: { type: string }) => {
                     password: data.password
                 }
                 const newUser = await signUp(userData);
-                setuser(newUser);
+                if (newUser.fail) {
+                    setIsLoading(false);
+                    const errorMessage = newUser.message || "Sign up failed! Please try again later.";
+                    toast.error(errorMessage);
+                } else setuser(newUser);
             }
 
             if (type === "sign-in") {
@@ -57,20 +61,24 @@ const AuthForm = ({ type }: { type: string }) => {
                     email: data.email,
                     password: data.password
                 });
-                if (response.code) toast.error("Sign in failed! Please check your email and password.");
-                else router.push("/");
+
+                if (response.fail) {
+                    setIsLoading(false);
+                    const errorMessage = response.message;
+                    toast.error(errorMessage);
+                } else router.push("/");
             }
-        } catch (error) {
-            toast.error("An unexpected error occurred. Please try again later.");
-        } finally {
-            // setIsLoading(false);
+        } catch (error: any) {
+            const errorMessage = error?.response?.message || "Unexpected error occurred. Please try again later.";
+            toast.error(errorMessage);
+            setIsLoading(false);
         }
     }
 
     return (
         <section className="auth-form">
             <header className="flex flex-col gap-5 md:gap-8">
-                <Link href="/" className="cursor-pointer flex items-center gap-1" onClick={() => setIsLoading(true)}>
+                <Link href="/" className="pointer-events-none flex items-center gap-1">
                     <Image
                         src="./icons/logo.svg"
                         width={34}

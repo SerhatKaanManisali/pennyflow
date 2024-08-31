@@ -5,11 +5,13 @@ import { useRouter } from 'next/navigation';
 import { createLinkToken, exchangePublicToken } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { useLoading } from './LoadingOverlay';
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     const router = useRouter();
     const [token, setToken] = useState("");
-
+    const {setIsLoading} = useLoading();
+    useEffect(() => setIsLoading(false) , []);
     useEffect(() => {
         const getLinkToken = async () => {
             const data = await createLinkToken(user);
@@ -19,11 +21,11 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     }, [user]);
 
     const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string) => {
+        setIsLoading(true);
         await exchangePublicToken({
             publicToken: public_token,
             user
         });
-
         router.push("/");
     }, [user]);
 
