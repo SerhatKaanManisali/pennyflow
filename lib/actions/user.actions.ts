@@ -8,6 +8,7 @@ import { AccountBase, CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCr
 import { plaidClient } from "../plaid";
 import { revalidatePath } from "next/cache";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
+import { toast } from "sonner";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -33,8 +34,7 @@ export const signIn = async ({ email, password }: signInProps) => {
         const user = await getUserInfo({ userId: session.userId });
         return parseStringify(user);
     } catch (error) {
-        console.error("Error:", error);
-
+        return error;
     }
 }
 
@@ -57,7 +57,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
         setCookies(session);
         return parseStringify(newUser);
     } catch (error) {
-        console.error(error);
+        toast.error('Sign up failed!');
     }
 }
 

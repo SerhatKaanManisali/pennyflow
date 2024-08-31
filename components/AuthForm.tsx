@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
 import { useLoading } from './LoadingOverlay'
+import { toast } from 'sonner'
 
 const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
@@ -56,10 +57,13 @@ const AuthForm = ({ type }: { type: string }) => {
                     email: data.email,
                     password: data.password
                 });
-                if (response) router.push("/");
+                if (response.code) toast.error("Sign in failed! Please check your email and password.");
+                else router.push("/");
             }
         } catch (error) {
-            console.log(error);
+            toast.error("An unexpected error occurred. Please try again later.");
+        } finally {
+            // setIsLoading(false);
         }
     }
 

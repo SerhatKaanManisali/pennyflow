@@ -16,7 +16,7 @@ export const formatDateTime = (dateString: Date) => {
     day: "numeric", // numeric day of the month (e.g., '25')
     hour: "numeric", // numeric hour (e.g., '8')
     minute: "numeric", // numeric minute (e.g., '30')
-    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const dateDayOptions: Intl.DateTimeFormatOptions = {
@@ -35,7 +35,7 @@ export const formatDateTime = (dateString: Date) => {
   const timeOptions: Intl.DateTimeFormatOptions = {
     hour: "numeric", // numeric hour (e.g., '8')
     minute: "numeric", // numeric minute (e.g., '30')
-    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const formattedDateTime: string = new Date(dateString).toLocaleString(
@@ -202,6 +202,7 @@ export const authFormSchema = (type: string) => z.object({
   city: type === "sign-in" ? z.string().optional() : z.string().max(50),
   state: type === "sign-in" ? z.string().optional() : z.string().min(2).max(2),
   postalCode: type === "sign-in" ? z.string().optional() : z.string().min(3).max(6),
+  
   dateOfBirth:
     type === "sign-in" ? z.string().optional() : z.string().regex(
       /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\d\d$/,
@@ -211,6 +212,7 @@ export const authFormSchema = (type: string) => z.object({
       const parsedDate = new Date(year, month - 1, day);
       return parsedDate <= new Date();
     }, "Date of birth cannot be in the future"),
+
   ssn: type === "sign-in" ? z.string().optional() : z.string().min(4, "SSN must be 4 numbers long").max(4),
   email: z.string().email(),
   password: type === "sign-in"

@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import Footer from './Footer'
 import PlaidLink from './PlaidLink'
+import ThemeToggle from './ThemeToggle'
 
 const MobileNav = ({ user }: MobileNavProps) => {
     const pathName = usePathname();
@@ -19,14 +20,14 @@ const MobileNav = ({ user }: MobileNavProps) => {
                 <SheetTrigger>
                     <Image src="/icons/hamburger.svg" width={30} height={30} alt="menu" className="cursor-pointer" />
                 </SheetTrigger>
-                <SheetContent side="left" className="border-none bg-white">
-                    <Link href="/" className="cursor-pointer flex items-center gap-1 px-4">
+                <SheetContent side="left" className="border-none bg-white dark:!bg-[#121212]">
+                    <Link href="/" className="pointer-events-none flex items-center gap-1 px-4">
                         <Image src="./icons/logo.svg" width={34} height={34} alt="Pennyflow logo" />
                         <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Pennyflow</h1>
                     </Link>
                     <div className="mobilenav-sheet">
                         <SheetClose asChild>
-                            <nav className="flex h-full flex-col gap-6 pt-16 text-white">
+                            <nav className="flex h-full flex-col gap-3 pt-16 text-white">
                                 {sidebarLinks.map((item) => {
                                     const isActive = pathName === item.route || pathName.startsWith(`${item.route}/`);
                                     return (
@@ -42,11 +43,10 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                         </SheetClose>
                                     )
                                 })}
-
                                 <PlaidLink user={user} variant='mobile'/>
+                                <ThemeToggle />
                             </nav>
                         </SheetClose>
-
                         <Footer user={user} type="mobile" />
                     </div>
                 </SheetContent>

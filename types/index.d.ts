@@ -170,7 +170,7 @@ declare interface PageHeaderProps {
 
 declare interface PaginationProps {
   page: number;
-  setIsLaoading: (loading: boolean) => void;
+  setLoadingState: (loading: boolean) => void;
   totalPages: number;
 }
 

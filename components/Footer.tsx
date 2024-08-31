@@ -20,11 +20,11 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
                 </p>
             </div>
             <div className={type === "mobile" ? "footer_email-mobile" : "footer_email"}>
-                <h1 className="text-14 truncate font-semibold">{user.firstName}</h1>
+                <h1 className="text-14 truncate font-semibold text-gray-600">{user.firstName}</h1>
                 <p className="text-14 truncate font-normal text-gray-600">{user.email}</p>
             </div>
             <div className="footer_image" onClick={handleLogOut}>
-                <Image src="/icons/logout.svg" fill alt="logout" className='sidebar-link-icon p-2'/>
+                <Image src="/icons/logout.svg" fill alt="logout" className='sidebar-link-icon p-2 max-md:p-[0.625rem]'/>
             </div>
         </footer>
     )

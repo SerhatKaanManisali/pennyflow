@@ -177,7 +177,7 @@ input[type="number"] {
   }
 
   .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 dark:bg-gray-300 border-8 border-white dark:border-gray-300 p-2 shadow-profile;
+    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 dark:bg-gray-300 border-8 border-white dark:border-gray-200 p-2 shadow-profile;
   }
 
   .profile-details {
@@ -202,7 +202,7 @@ input[type="number"] {
   }
 
   .transactions {
-    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 dark:bg-[#121212] p-8 xl:py-12;
+    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll no-scrollbar bg-gray-25 dark:bg-[#121212] p-8 xl:py-12;
   }
 
   .transactions-header {
@@ -266,11 +266,11 @@ input[type="number"] {
 
   /* Mobile nav */
   .mobilenav-sheet {
-    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
+    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto no-scrollbar;
   }
 
   .mobilenav-sheet_close {
-    @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
+    @apply flex gap-3 items-center p-3 rounded-lg w-full max-w-60;
   }
 
   /* PlaidLink */
@@ -293,7 +293,7 @@ input[type="number"] {
 
   /* Auth Form */
   .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8 no-scrollbar;
   }
 
   .form-item {
@@ -353,11 +353,11 @@ input[type="number"] {
 
   /* Footer */
   .footer {
-    @apply flex items-center justify-between gap-2 py-6;
+    @apply flex items-center justify-between max-xl:justify-center max-xl:py-3 gap-2 py-6;
   }
 
   .footer_name {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-300 max-xl:hidden dark:text-gray-600;
+    @apply flex size-10 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-300 max-xl:hidden text-gray-900;
   }
 
   .footer_email {
@@ -365,7 +365,7 @@ input[type="number"] {
   }
 
   .footer_name-mobile {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-200;
+    @apply flex size-10 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-300 dark:text-gray-900;
   }
 
   .footer_email-mobile {
@@ -373,7 +373,7 @@ input[type="number"] {
   }
 
   .footer_image {
-    @apply relative cursor-pointer size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center rounded-lg p-5 hover:bg-bank-gradient;
+    @apply relative cursor-pointer size-4 rounded-lg p-5 hover:bg-bank-gradient;
   }
 
   .footer_image:hover img {
@@ -411,11 +411,11 @@ input[type="number"] {
   }
 
   .theme-toggle {
-    @apply ml-1 hover:bg-bank-gradient;
+    @apply w-[3.2rem] max-md:w-11 h-12 p-3 hover:bg-bank-gradient;
   }
 
   .theme-toggle-icon {
-    @apply h-[1.2rem] w-[1.2rem] transition-all text-[#667085];
+    @apply h-[1.5rem] w-[1.5rem] max-md:w-5 max-md:h-5 transition-all text-[#667085];
   }
 
   .theme-toggle:hover .theme-toggle-icon {

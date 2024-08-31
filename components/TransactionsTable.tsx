@@ -35,7 +35,7 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                     const isCredit = transaction.type === 'credit'
 
                     return (
-                        <TableRow key={transaction.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#301a1a]' : 'bg-[#0f2621]'} !over:bg-none !border-b-DEFAULT`} >
+                        <TableRow key={transaction.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#fffbfa] dark:bg-[#301a1a]' : 'bg-[#F6FEF9] dark:bg-[#0f2621]'} !over:bg-none !border-b-DEFAULT`} >
                             <TableCell className='max-w-[250px] pl-2 pr-10'>
                                 <div className='flex items-center gap-3'>
                                     <h1 className='text-14 truncate font-semibold text-[#344054] dark:text-gray-400'>

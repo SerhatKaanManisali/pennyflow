@@ -22,7 +22,7 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
     const searchParams = useSearchParams();
     const pathName = usePathname();
     const router = useRouter();
-    useEffect(() => setIsLoading(false), [page, searchParams]);
+    useEffect(() => setLoadingState(false), [page, searchParams]);
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString());
         params.delete('page');
@@ -59,7 +59,7 @@ const RecentTransactions = ({ accounts, transactions = [], appwriteItemId, page 
                         )}
                         {totalPages > 1 && (
                             <div className='my-4 w-full'>
-                                <Pagination totalPages={totalPages} page={page} setIsLaoading={setLoadingState} />
+                                <Pagination totalPages={totalPages} page={page} setLoadingState={setLoadingState} />
                             </div>
                         )}
                     </TabsContent>

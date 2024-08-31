@@ -3,6 +3,7 @@ import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
 import { LoadingProvider } from "@/components/LoadingOverlay";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -31,6 +32,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LoadingProvider>
             {children}
+            <Toaster position="bottom-center" richColors />
           </LoadingProvider>
         </ThemeProvider>
       </body>
