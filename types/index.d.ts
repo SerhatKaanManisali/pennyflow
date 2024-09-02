@@ -353,3 +353,18 @@ interface LoadingProviderProps {
 interface ThemeToggleParams {
   onAuth?: boolean;
 }
+
+interface BankResponse {
+  $id: string;
+  userId: {
+      $id: string;
+  };
+  fundingSourceUrl: string;
+}
+
+interface handleTransactionParams {
+  transfer: string | null | undefined;
+  data: z.infer<typeof formSchema>;
+  senderBank: BankResponse;
+  receiverBank: BankResponse;
+}

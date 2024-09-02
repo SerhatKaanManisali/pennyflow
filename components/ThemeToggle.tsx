@@ -18,14 +18,17 @@ const ThemeToggle = ({onAuth}: ThemeToggleParams) => {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="start" className="bg-white dark:bg-[#121212]">
-                <DropdownMenuItem onClick={() => setTheme("light")} className="hover:bg-gray-300 dark:hover:bg-[#191919] cursor-pointer">
+                <DropdownMenuItem onClick={() => setTheme("light")} className="hover:bg-gray-200 dark:hover:bg-[#191919] cursor-pointer">
                     Light
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")} className="hover:bg-gray-300 dark:hover:bg-[#191919] cursor-pointer">
+
+                <DropdownMenuItem onClick={() => setTheme("dark")} className="hover:bg-gray-200 dark:hover:bg-[#191919] cursor-pointer">
                     Dark
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")} className="hover:bg-gray-300 dark:hover:bg-[#191919] cursor-pointer">
+                
+                <DropdownMenuItem onClick={() => setTheme("system")} className="hover:bg-gray-200 dark:hover:bg-[#191919] cursor-pointer">
                     System
                 </DropdownMenuItem>
             </DropdownMenuContent>

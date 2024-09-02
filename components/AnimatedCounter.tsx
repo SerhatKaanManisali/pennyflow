@@ -6,7 +6,13 @@ import CountUp from 'react-countup'
 const AnimatedCounter = ({ amount }: { amount: number }) => {
     return (
         <div className="w-full">
-            <CountUp decimal="," suffix="€" decimals={2} separator="." end={amount} />
+            <CountUp
+            decimal=","
+            suffix="€"
+            decimals={2}
+            separator="."
+            end={amount}
+            />
         </div>
     )
 }

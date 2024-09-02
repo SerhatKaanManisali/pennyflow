@@ -9,9 +9,12 @@ export default function RootLayout({
     return (
         <main className="flex min-h-screen w-full justify-between font-inter">
             <div className="flex flex-col w-full">
-                <div className="ml-2 mt-2"><ThemeToggle onAuth={true} /></div>
+                <div className="ml-2 mt-2">
+                    <ThemeToggle onAuth={true} />
+                </div>
                 {children}
             </div>
+
             <div className="auth-asset">
                 <div>
                     <Image src="/icons/auth-image.svg" alt="Auth iamge" width={500} height={500} />

@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
 import { formUrlQuery } from "@/lib/utils";
 
 export const Pagination = ({ page, totalPages, setLoadingState }: PaginationProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams()!;
+  const searchParams = useSearchParams();
 
   const handleNavigation = (type: "prev" | "next") => {
     setLoadingState(true);
@@ -18,7 +17,6 @@ export const Pagination = ({ page, totalPages, setLoadingState }: PaginationProp
       key: "page",
       value: pageNumber.toString(),
     });
-
     router.push(newUrl, { scroll: false });
   };
 

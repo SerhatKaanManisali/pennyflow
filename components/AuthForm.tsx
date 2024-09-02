@@ -9,12 +9,14 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import CustomInput from './CustomInput'
-import { authFormSchema } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
 import { useLoading } from './LoadingOverlay'
 import { toast } from 'sonner'
+
+import SignUpForm from './SignUpForm'
+import { authFormSchema, userDataTemplate } from '@/lib/template'
 
 const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
@@ -33,45 +35,43 @@ const AuthForm = ({ type }: { type: string }) => {
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setIsLoading(true);
         try {
-            if (type === "sign-up") {
-                const [day, month, year] = data.dateOfBirth!.split('-');
-                const formattedDateOfBirth = `${year}-${month}-${day}`;
-                const userData = {
-                    firstName: data.firstName!,
-                    lastName: data.lastName!,
-                    address1: data.address1!,
-                    city: data.city!,
-                    state: data.state!,
-                    postalCode: data.postalCode!,
-                    dateOfBirth: formattedDateOfBirth,
-                    ssn: data.ssn!,
-                    email: data.email,
-                    password: data.password
-                }
-                const newUser = await signUp(userData);
-                if (newUser.fail) {
-                    setIsLoading(false);
-                    const errorMessage = newUser.message || "Sign up failed! Please try again later.";
-                    toast.error(errorMessage);
-                } else setuser(newUser);
-            }
-
-            if (type === "sign-in") {
-                const response = await signIn({
-                    email: data.email,
-                    password: data.password
-                });
-
-                if (response.fail) {
-                    setIsLoading(false);
-                    const errorMessage = response.message;
-                    toast.error(errorMessage);
-                } else router.push("/");
-            }
+            await trySubmit(data);
         } catch (error: any) {
             const errorMessage = error?.response?.message || "Unexpected error occurred. Please try again later.";
             toast.error(errorMessage);
             setIsLoading(false);
+        }
+    }
+
+    const trySubmit = async (data: z.infer<typeof formSchema>) => {
+        switch (type) {
+            case 'sign-up':
+                const userData = userDataTemplate(data, formatDateOfBirth(data));
+                const newUser = await signUp(userData);
+                handleResponse(newUser);
+                break;
+            case 'sign-in':
+                const response = await signIn({
+                    email: data.email,
+                    password: data.password
+                });
+                handleResponse(response);
+                break;
+        }
+    }
+
+    const formatDateOfBirth = (data: z.infer<typeof formSchema>) => {
+        const [day, month, year] = data.dateOfBirth!.split('-');
+        return `${year}-${month}-${day}`;
+    }
+
+    const handleResponse = (response: any) => {
+        if (response.fail) {
+            setIsLoading(false);
+            toast.error(response.message);
+        } else {
+            if (type === 'sign-up') setuser(response);
+            else if (type === 'sign-in') router.push('/');
         }
     }
 
@@ -85,8 +85,11 @@ const AuthForm = ({ type }: { type: string }) => {
                         height={34}
                         alt="Pennyflow logo"
                     />
-                    <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 dark:text-white">Pennyflow</h1>
+                    <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 dark:text-white">
+                        Pennyflow
+                    </h1>
                 </Link>
+                
                 <div className="flex flex-col gap-1 md:gap-3">
                     <h1 className="text-24 lg:text-36 font-semibold text-gray-900 dark:text-white">
                         {user ? "Link Account" : type === "sign-in" ? "Sign in" : "Sign up"}
@@ -96,6 +99,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     </h1>
                 </div>
             </header>
+
             {user ? (
                 <div className="flex flex-col gap-4">
                     <PlaidLink user={user} variant="primary" />
@@ -106,25 +110,12 @@ const AuthForm = ({ type }: { type: string }) => {
                         <form onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-4">
                             {type === "sign-up" && (
-                                <>
-                                    <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"firstName"} label={"First name"} placeholder={"Enter your first name"} />
-                                        <CustomInput control={form.control} name={"lastName"} label={"Last name"} placeholder={"Enter your last name"} />
-                                    </div>
-                                    <CustomInput control={form.control} name={"address1"} label={"Address"} placeholder={"Enter your address"} />
-                                    <CustomInput control={form.control} name={"city"} label={"City"} placeholder={"Enter your city"} />
-                                    <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"state"} label={"State"} placeholder={"Example: NW"} />
-                                        <CustomInput control={form.control} name={"postalCode"} label={"Postal code"} placeholder={"Example: 10317"} />
-                                    </div>
-                                    <div className="flex gap-4">
-                                        <CustomInput control={form.control} name={"dateOfBirth"} label={"Date of birth"} placeholder={"DD-MM-YYYY"} />
-                                        <CustomInput control={form.control} name={"ssn"} label={"SSN"} placeholder={"Example: 1234"} />
-                                    </div>
-                                </>
+                                <SignUpForm form={form}/>
                             )}
+
                             <CustomInput control={form.control} name={"email"} label={"Email"} placeholder={"Enter your email"} />
                             <CustomInput control={form.control} name={"password"} label={"Password"} placeholder={"Enter your password"} />
+                            
                             <div className="flex flex-col gap-4">
                                 <Button type="submit" className="form-btn">
                                     {type === "sign-in" ? "Sign in" : "Sign up"}
@@ -132,10 +123,12 @@ const AuthForm = ({ type }: { type: string }) => {
                             </div>
                         </form>
                     </Form>
+
                     <footer className="flex justify-center gap-1">
                         <p className="text-14 font-normal text-gray-600">
                             {type === "sign-in" ? "Don't have an account?" : "Already have an account?"}
                         </p>
+                        
                         <Link
                             href={type === "sign-in" ? "/sign-up" : "/sign-in"} className="form-link" onClick={() => setIsLoading(true)}>
                             {type === "sign-in" ? "Sign up" : "Sign in"}

@@ -10,9 +10,11 @@ import { cn } from '@/lib/utils'
 import Footer from './Footer'
 import PlaidLink from './PlaidLink'
 import ThemeToggle from './ThemeToggle'
+import { useLoading } from './LoadingOverlay'
 
 const MobileNav = ({ user }: MobileNavProps) => {
     const pathName = usePathname();
+    const {setIsLoading} = useLoading();
 
     return (
         <section className="w-full max-w-[264px]">
@@ -20,11 +22,13 @@ const MobileNav = ({ user }: MobileNavProps) => {
                 <SheetTrigger>
                     <Image src="/icons/hamburger.svg" width={30} height={30} alt="menu" className="cursor-pointer" />
                 </SheetTrigger>
+                
                 <SheetContent side="left" className="border-none bg-white dark:!bg-[#121212]">
                     <Link href="/" className="pointer-events-none flex items-center gap-1 px-4">
                         <Image src="./icons/logo.svg" width={34} height={34} alt="Pennyflow logo" />
                         <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 dark:text-gray-300">Pennyflow</h1>
                     </Link>
+
                     <div className="mobilenav-sheet">
                         <SheetClose asChild>
                             <nav className="flex h-full flex-col gap-3 pt-16 text-white">
@@ -34,7 +38,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                         <SheetClose asChild key={item.route}>
                                             <Link
                                                 href={item.route} key={item.label}
-                                                className={cn("mobilenav-sheet_close w-full", { "bg-bank-gradient": isActive })}>
+                                                className={cn("mobilenav-sheet_close w-full", { "bg-bank-gradient": isActive })} onClick={() => setIsLoading(true)}>
                                                 <Image src={item.imgURL} alt={item.label} width={20} height={20} className={cn({ "brightness-[3] invert-0": isActive })} />
                                                 <p className={cn("text-16 font-semibold text-black-2", { "!text-white": isActive })}>
                                                     {item.label}
@@ -43,6 +47,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                         </SheetClose>
                                     )
                                 })}
+                                
                                 <PlaidLink user={user} variant='mobile' />
                                 <ThemeToggle />
                             </nav>

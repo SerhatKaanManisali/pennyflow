@@ -8,19 +8,29 @@ import React from 'react'
 const MyBanks = async () => {
     const loggedIn = await getLoggedInUser();
     if (!loggedIn) redirect("/sign-in");
+
     const accounts = await getAccounts({ userId: loggedIn.$id });
 
     return (
         <section className='flex'>
             <div className='my-banks'>
-                <HeaderBox title='My bank accounts' subtext='Effortlessly manage your banking activities.' />
+                <HeaderBox
+                title='My bank accounts'
+                subtext='Effortlessly manage your banking activities.'
+                />
+
                 <div className='space-y-4'>
                     <h2 className='header-2'>
                         Your cards
                     </h2>
+
                     <div className='flex flex-wrap gap-6'>
                         {accounts && accounts.data.map((account: Account) => (
-                            <BankCard key={account.id} account={account} userName={loggedIn?.firstName} />
+                            <BankCard
+                            key={account.id}
+                            account={account} 
+                            userName={loggedIn?.firstName}
+                            />
                         ))}
                     </div>
                 </div>

@@ -22,6 +22,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
                     <Image src="./icons/logo.svg" width={34} height={34} alt="Pennyflow logo" className="size-[24px] max-xl:size-14" />
                     <h1 className="sidebar-logo">Pennyflow</h1>
                 </div>
+
                 {sidebarLinks.map((item) => {
                     const isActive = pathName === item.route || pathName.startsWith(`${item.route}/`);
 
@@ -29,14 +30,17 @@ const Sidebar = ({ user }: SiderbarProps) => {
                         href={item.route} key={item.label}
                         className={cn("sidebar-link", { "bg-bank-gradient pointer-events-none": isActive })}
                         onClick={() => setIsLoading(true)}>
+
                         <div className="relative size-6">
                             <Image src={item.imgURL} alt={item.label} fill className={cn({ "brightness-[3] invert-0": isActive }, "sidebar-link-icon")} />
                         </div>
+
                         <p className={cn("sidebar-label", { "!text-white": isActive })}>
                             {item.label}
                         </p>
                     </Link>
                 })}
+                
                 <PlaidLink user={user} />
                 <ThemeToggle />
             </nav>

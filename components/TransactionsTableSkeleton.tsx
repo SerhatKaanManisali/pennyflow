@@ -1,5 +1,4 @@
 import React from 'react'
-import { Skeleton } from "@/components/ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 
 const TransactionsTableSkeleton = () => {
@@ -17,28 +16,34 @@ const TransactionsTableSkeleton = () => {
                     <TableHead className="px-2 max-lg:hidden">Category</TableHead>
                 </TableRow>
             </TableHeader>
+
             <TableBody>
                 {rows.map((_, index) => (
                     <TableRow key={index} className="bg-[#f9fafb] dark:bg-[#373737] animate-pulse">
                         <TableCell className='max-w-[250px] pl-2 pr-10'>
                             <div className='flex items-center gap-3'>
-                                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                                <div className="h-4 bg-gray-300 rounded w-3/4"/>
                             </div>
                         </TableCell>
+
                         <TableCell className="pl-2 pr-10">
-                            <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+                            <div className="h-4 bg-gray-300 rounded w-1/4"/>
                         </TableCell>
+
                         <TableCell className='pl-2 pr-10'>
-                            <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                            <div className="h-4 bg-gray-300 rounded w-1/2"/>
                         </TableCell>
+
                         <TableCell className='pl-2 pr-10 min-w-32'>
-                            <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+                            <div className="h-4 bg-gray-300 rounded w-1/3"/>
                         </TableCell>
+
                         <TableCell className='pl-2 pr-10 max-md:hidden min-w-24 capitalize'>
-                            <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                            <div className="h-4 bg-gray-300 rounded w-1/2"/>
                         </TableCell>
+                        
                         <TableCell className='pl-2 pr-10 max-lg:hidden'>
-                            <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                            <div className="h-4 bg-gray-300 rounded w-1/2"/>
                         </TableCell>
                     </TableRow>
                 ))}

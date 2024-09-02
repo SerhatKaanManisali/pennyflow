@@ -1,6 +1,6 @@
 'use server';
 
-import { ID, Query } from "node-appwrite";
+import { Databases, ID, Query } from "node-appwrite";
 import { createAdminClient } from "../appwrite";
 import { parseStringify } from "../utils";
 
@@ -27,19 +27,21 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
         return {fail: true, message: 'Creating transfer failed!'}
     }
 }
+
+export const queryTransactions = async (database: Databases, bankId: string, type: string) => {
+    const transactions = await database.listDocuments(
+        DATABASE_ID!,
+        TRANSACTION_COLLECTION_ID!,
+        [Query.equal(`${type}BankId`, bankId)]
+    )
+    return transactions;
+}
+
 export const getTransactionsByBankId = async ({bankId}: getTransactionsByBankIdProps) => {
     try {
         const {database} = await createAdminClient();
-        const senderTransactions = await database.listDocuments(
-            DATABASE_ID!,
-            TRANSACTION_COLLECTION_ID!,
-            [Query.equal('senderBankId', bankId)]
-        )
-        const receiverTransactions = await database.listDocuments(
-            DATABASE_ID!,
-            TRANSACTION_COLLECTION_ID!,
-            [Query.equal('receiverBankId', bankId)]
-        )
+        const senderTransactions = await queryTransactions(database, bankId, 'sender');
+        const receiverTransactions = await queryTransactions(database, bankId, 'receiver');
         const transactions = {
             total: senderTransactions.total + receiverTransactions.total,
             documents: [...senderTransactions.documents, ...receiverTransactions.documents]

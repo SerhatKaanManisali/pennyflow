@@ -8,7 +8,6 @@ import { AccountBase, CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCr
 import { plaidClient } from "../plaid";
 import { revalidatePath } from "next/cache";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
-import { toast } from "sonner";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
