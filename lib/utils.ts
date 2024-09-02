@@ -86,6 +86,10 @@ interface UrlQueryParams {
 }
 
 export function formUrlQuery({ params, key, value }: UrlQueryParams) {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;

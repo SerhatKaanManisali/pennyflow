@@ -31,14 +31,6 @@ export const getPlaidInstitution = async (accountsResponse: AxiosResponse<Accoun
     return institution;
 }
 
-export const getAccountTotal = (accounts: any[]) => {
-    const totalBanks = accounts.length;
-    const totalCurrentBalance = accounts.reduce((total, account) => {
-        return total + account.currentBalance;
-    }, 0);
-    return { totalBanks, totalCurrentBalance };
-}
-
 export const getTransferTransactions = async (bank: Bank) => {
     const transferTransactionsData = await getTransactionsByBankId({
         bankId: bank.$id,
@@ -47,10 +39,6 @@ export const getTransferTransactions = async (bank: Bank) => {
         (transferData: Transaction) => (transferDataTemplate(transferData, bank))
     );
     return transferTransactions;
-}
-
-export const sortTransactions = (transactions: Transaction[], transferTransactions: any) => {
-
 }
 
 export const getAccounts = async ({ userId }: getAccountsProps) => {
@@ -64,7 +52,10 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
                 return account;
             })
         );
-        const { totalBanks, totalCurrentBalance } = getAccountTotal(accounts);
+        const totalBanks = accounts.length;
+        const totalCurrentBalance = accounts.reduce((total, account) => {
+            return total + account.currentBalance;
+        }, 0);
         return parseStringify({ data: accounts, totalBanks, totalCurrentBalance });
     } catch (error) {
         console.error("An error occurred while getting the accounts:", error);
@@ -84,7 +75,6 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
         const allTransactions = [...transactions, ...transferTransactions].sort(
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
-
         return parseStringify({
             data: account,
             transactions: allTransactions,
