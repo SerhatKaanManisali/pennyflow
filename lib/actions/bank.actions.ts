@@ -50,9 +50,7 @@ export const getTransferTransactions = async (bank: Bank) => {
 }
 
 export const sortTransactions = (transactions: Transaction[], transferTransactions: any) => {
-    [...transactions, ...transferTransactions].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+
 }
 
 export const getAccounts = async ({ userId }: getAccountsProps) => {
@@ -83,7 +81,10 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
             accessToken: bank?.accessToken,
         });
         const account = accountDataTemplate(accountData, institution, bank);
-        const allTransactions = sortTransactions(transactions, transferTransactions);
+        const allTransactions = [...transactions, ...transferTransactions].sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
         return parseStringify({
             data: account,
             transactions: allTransactions,
@@ -93,7 +94,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
     }
 };
 
-export const getInstitution = async ({institutionId}: getInstitutionProps) => {
+export const getInstitution = async ({ institutionId }: getInstitutionProps) => {
     try {
         const institutionResponse = await plaidClient.institutionsGetById({
             institution_id: institutionId,
@@ -107,21 +108,21 @@ export const getInstitution = async ({institutionId}: getInstitutionProps) => {
 };
 
 export const syncTransactions = async (accessToken: string) => {
-    let hasMore = true;
-    let transactions: any = [];
-    while (hasMore) {
-        const response = await plaidClient.transactionsSync({
-            access_token: accessToken,
-        });
-        const data = response.data;
-        transactions = response.data.added.map((transaction) => (transactionDataTemplate(transaction)));
-        hasMore = data.has_more;
-    }
+
 }
 
-export const getTransactions = async ({accessToken}: getTransactionsProps) => {
+export const getTransactions = async ({ accessToken }: getTransactionsProps) => {
+    let hasMore = true;
+    let transactions: any = [];
     try {
-        let transactions = await syncTransactions(accessToken);
+        while (hasMore) {
+            const response = await plaidClient.transactionsSync({
+                access_token: accessToken,
+            });
+            const data = response.data;
+            transactions = response.data.added.map((transaction) => (transactionDataTemplate(transaction)));
+            hasMore = data.has_more;
+        }
         return parseStringify(transactions);
     } catch (error) {
         console.error("An error occurred while getting the transactions:", error);
