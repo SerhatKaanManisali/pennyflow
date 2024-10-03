@@ -47,11 +47,12 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
         const accounts = await Promise.all(
             banks?.map(async (bank: Bank) => {
                 const { accountsResponse, accountData } = await getPlaidAccountInfo(bank);
-                const institution = getPlaidInstitution(accountsResponse);
+                const institution = await getPlaidInstitution(accountsResponse);
                 const account = accountDataTemplate(accountData, institution, bank);
                 return account;
             })
         );
+        
         const totalBanks = accounts.length;
         const totalCurrentBalance = accounts.reduce((total, account) => {
             return total + account.currentBalance;

@@ -30,12 +30,12 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
             name: "",
             amount: "",
             senderBank: "",
-            sharableId: "",
+            shareableId: "",
         },
     });
 
-    const getTransferParams = async (sharableId: string, senderBankId: string) => {
-        const receiverAccountId = decryptId(sharableId);
+    const getTransferParams = async (shareableId: string, senderBankId: string) => {
+        const receiverAccountId = decryptId(shareableId);
         const receiverBank = await getBankByAccountId({ accountId: receiverAccountId });
         const senderBank = await getBank({ documentId: senderBankId });
         return { receiverBank, senderBank };
@@ -82,7 +82,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
     const submit = async (data: z.infer<typeof formSchema>) => {
         setIsLoading(true);
         try {
-            const { receiverBank, senderBank } = await getTransferParams(data.sharableId, data.senderBank);
+            const { receiverBank, senderBank } = await getTransferParams(data.shareableId, data.senderBank);
             const transfer = await requestTransfer(senderBank, receiverBank, data.amount);
             handleTransaction({transfer, data, senderBank, receiverBank});
         } catch (error) {
@@ -168,7 +168,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
 
                 <FormField
                     control={form.control}
-                    name="sharableId"
+                    name="shareableId"
                     render={({ field }) => (
                         <FormItem className="border-t border-gray-200">
                             <div className="payment-transfer_form-item pb-5 pt-6">
