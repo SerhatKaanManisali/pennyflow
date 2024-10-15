@@ -27,6 +27,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
             user
         });
         router.push("/");
+        setIsLoading(false);
     }, [user]);
 
     const config: PlaidLinkOptions = {
