@@ -98,10 +98,6 @@ export const getInstitution = async ({ institutionId }: getInstitutionProps) => 
     }
 };
 
-export const syncTransactions = async (accessToken: string) => {
-
-}
-
 export const getTransactions = async ({ accessToken }: getTransactionsProps) => {
     let hasMore = true;
     let transactions: any = [];

@@ -31,7 +31,7 @@ export const authFormSchema = (type: string) => z.object({
     name: z.string(),
     amount: z.string().min(1, "Amount is too short"),
     senderBank: z.string().min(4, "Please select a valid bank account"),
-    shareableId: z.string().min(8, "Please select a valid sharable Id"),
+    shareableId: z.string().min(8, "Please select a valid shareable Id"),
   });
 
 export const userDataTemplate = (data: z.infer<any>, formattedDateOfBirth: string) => {
