@@ -13,7 +13,7 @@ const SignUpForm = ({form}: any) => {
             <CustomInput control={form.control} name={"city"} label={"City"} placeholder={"Enter your city"} />
 
             <div className="flex gap-4" >
-                <CustomInput control={form.control} name={"state"} label={"State"} placeholder={"Example: NW"} />
+                <CustomInput control={form.control} name={"state"} label={"State"} placeholder={"Example: NY"} />
                 <CustomInput control={form.control} name={"postalCode"} label={"Postal code"} placeholder={"Example: 10317"} />
             </div>
 
